@@ -152,7 +152,7 @@ class Data_processor:
 				new_bbox_h = 4.0/3.0 * bbox_w
 				diff = new_bbox_h - bbox_h
 				new_bbox_x = bbox_x
-				new_bbox_y = new_bbox_y - 0.5 * diff
+				new_bbox_y = bbox_y - 0.5 * diff
 				if new_bbox_y < 0:
 					new_bbox_y = 0
 				if new_bbox_y+new_bbox_h >= img_h:
