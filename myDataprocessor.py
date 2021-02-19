@@ -69,10 +69,11 @@ class Data_processor:
 					if anno['image_id'] in temp_image_id_with_label:
 						bbox_temp = anno['bbox']
 						if bbox_temp[2] != 0 or bbox_temp[3] != 0:
-							temp_anno_bbox_list.append(anno['bbox'])
-							temp_anno_track_id_list.append(anno['track_id'])
-							temp_anno_id_list.append(anno['image_id'])
-							temp_anno_kp_list.append(anno['keypoints'])
+							if bbox_temp[0] >= 0 and bbox_temp[1] > = 0:
+								temp_anno_bbox_list.append(anno['bbox'])
+								temp_anno_track_id_list.append(anno['track_id'])
+								temp_anno_id_list.append(anno['image_id'])
+								temp_anno_kp_list.append(anno['keypoints'])
 		temp_id_to_file_dict = {temp_image_id_with_label[i]:temp_file_name_with_label[i] for i in range(len(temp_image_id_with_label))}
 
 		self.n_imgs = len(temp_anno_bbox_list)
