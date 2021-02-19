@@ -7,10 +7,10 @@ import tensorflow as tf
 from skimage.transform import resize
 import random
 
-class Data_processor(data_dir,anno_dir,model_input_shape,model_output_shape,batch_size_select,data_for):
+class Data_processor:
 	# data_for: 'train','val'
 	# for posetrack18 and pose estimation training
-	def __init__(self):
+	def __init__(self,data_dir,anno_dir,model_input_shape,model_output_shape,batch_size_select,data_for):
 		self.bbox = []
 		self.kps_and_valid = []
 		self.kps = []
