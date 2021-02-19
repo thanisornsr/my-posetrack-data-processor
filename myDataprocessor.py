@@ -58,7 +58,7 @@ class Data_processor:
 				data_images = data['images']
 				data_annotations = data['annotations']
 			for temp_image in data_images:
-				if image['is_labeled']:
+				if temp_image['is_labeled']:
 					temp_image_id_with_label.append(temp_image['id'])
 					temp_file_name_with_label.append(temp_image['file_name'])
 			
