@@ -86,7 +86,7 @@ class Data_processor:
 	def get_start_end_idx(self):
 		max_idx = self.n_imgs
 		temp_batch_size = self.batch_size
-		l = list(range(n))
+		l = list(range(max_idx))
 		temp_start_idx = l[0::temp_batch_size]
 		def add_batch_size(num,max_id=max_idx,bz=temp_batch_size):
 			return min(num+bz,max_id)
