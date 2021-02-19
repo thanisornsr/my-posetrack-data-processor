@@ -171,8 +171,8 @@ class Data_processor:
 			i_kps = temp_kps[i]
 			i_origin = np.array([i_bbox[0], i_bbox[1]])
 			for j in range(len(i_kps)):
-				if i_kps[i,0] != 0:
-					i_kps[i,:] = i_kps[i,:] - i_origin
+				if i_kps[j,0] != 0:
+					i_kps[j,:] = i_kps[j,:] - i_origin
 			temp_kps[i] = i_kps
 		self.kps = temp_kps
 
