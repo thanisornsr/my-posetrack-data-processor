@@ -102,7 +102,7 @@ class Data_processor:
 		for temp_anno_kp in temp_anno_kp_valid:
 			temp_x = np.array(temp_anno_kp[0::3])
 			temp_y = np.array(temp_anno_kp[1::3])
-			temp_valid = np.array(temp.anno_kp[2::3])
+			temp_valid = np.array(temp_anno_kp[2::3])
 			temp_valid = temp_valid.astype('float32')
 			temp_target_coord = np.stack([temp_x,temp_y],axis = 1)
 			temp_target_coord = temp_target_coord.astype('float32')
