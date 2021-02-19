@@ -198,8 +198,8 @@ class Data_processor:
 		y = [i for i in range(r_output_shape[0])]
 
 		xx,yy = tf.meshgrid(x,y)
-		xx = tf.reshape(tf.cast(xx,tf.float32),(1,*output_shape,1))
-		yy = tf.reshape(tf.cast(yy,tf.float32),(1,*output_shape,1))
+		xx = tf.reshape(tf.cast(xx,tf.float32),(1,*r_output_shape,1))
+		yy = tf.reshape(tf.cast(yy,tf.float32),(1,*r_output_shape,1))
 
 		input_kps_float = input_kps.astype(np.float64)
 
