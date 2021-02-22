@@ -250,7 +250,7 @@ class Data_processor:
 			o_crop = o_img[int(i_bbox[1]):int(i_bbox[1]+i_bbox[3]),int(i_bbox[0]):int(i_bbox[0]+i_bbox[2]),:]
 			# detect empthy image
 			if o_crop.shape[0] == 0 or o_crop.shape[1]  == 0 or o_crop.shape[2] == 0:
-				print('Detect empty image: '+i_dir)
+				# print('Detect empty image: '+i_dir)
 				continue
 			o_crop = resize(o_crop,temp_input_shape)
 			o_crop = o_crop.astype('float32')
