@@ -184,6 +184,8 @@ class Data_processor:
 		for i in range(len(temp_bbox)):
 			i_bbox = temp_bbox[i]
 			i_kps = temp_kps[i]
+			if i_bbox[2] == 0 or i_bbox[3] == 0:
+				i_bbox[3] = 1
 			scale_x = temp_output_shape[1] / i_bbox[2]
 			scale_y = temp_output_shape[0] / i_bbox[3]
 			temp_scale = np.array([scale_x, scale_y])
@@ -193,7 +195,7 @@ class Data_processor:
 			temp_kps[i] = i_kps
 		self.scaled_kps = temp_kps
 
-	def render_gaussian_heatmap(self,input_kps,sigma):
+	def render_gaussian_heatmap(self,input_kps,input_valids,sigma):
 		r_output_shape = self.output_shape
 		x = [i for i in range(r_output_shape[1])]
 		y = [i for i in range(r_output_shape[0])]
@@ -212,7 +214,9 @@ class Data_processor:
 		temp_heatmap = temp_heatmap * 255.
 		temp_heatmap = temp_heatmap.numpy()
 		temp_heatmap = np.reshape(temp_heatmap,(*r_output_shape,17))
-
+		for ii in range(len(input_valids)):
+			if input_valids[ii] <= 0:
+				temp_heatmap[:,:,ii] = np.zeros(r_output_shape)
 		return temp_heatmap
 
 	def gen_batch(self,batch_order):
@@ -239,13 +243,15 @@ class Data_processor:
 
 			#heatmap
 			i_kp = temp_kps[i]
-			o_heatmap = self.render_gaussian_heatmap(i_kp,2)
+			o_heatmap = self.render_gaussian_heatmap(i_kp,i_valid,2)
 
 			#imgs
 			i_img_id = temp_img_ids[i]
 			i_dir = temp_dict[i_img_id]
 			i_dir = self.data_dir + i_dir
 			o_img = mpimg.imread(i_dir)
+			if o_img.shape[0] == 0 or o_img.shape[1]  == 0 or o_img.ndim < 3:
+				continue
 			i_bbox = temp_bbox[i]
 			o_crop = o_img[int(i_bbox[1]):int(i_bbox[1]+i_bbox[3]),int(i_bbox[0]):int(i_bbox[0]+i_bbox[2]),:]
 			# detect empthy image
